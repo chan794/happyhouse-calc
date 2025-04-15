@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>행복주택 가점 계산기</title>
+  <style>
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      padding: 20px;
+      font-size: 16px;
+      max-width: 480px;
+      margin: auto;
+    }
+    h2 {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+    }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    #result, #marr_result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #d9534f;
+      text-align: center;
+    }
+    hr {
+      margin: 40px 0;
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎓 청년 행복주택 가점 계산기</h2>
 
+  <label>무주택 기간</label>
+  <select id="youth_nohouse">
+    <option value="0">1년 이하</option>
+    <option value="2">1~3년</option>
+    <option value="4">3~5년</option>
+    <option value="6">5~7년</option>
+    <option value="8">7년 이상</option>
+  </select>
+
+  <label>거주지 등록 기간</label>
+  <select id="youth_reside">
+    <option value="0">1년 이하</option>
+    <option value="2">1~3년</option>
+    <option value="4">3~5년</option>
+    <option value="5">5년 이상</option>
+  </select>
+
+  <label>소득 수준</label>
+  <select id="youth_income">
+    <option value="5">70% 이하</option>
+    <option value="3">70~100%</option>
+    <option value="0">100% 초과</option>
+  </select>
+
+  <button onclick="calculateScore()">청년 가점 계산</button>
+  <div id="result"></div>
+
+  <hr>
+
+  <h2>👪 신혼부부 행복주택 가점 계산기</h2>
+
+  <label>혼인 기간</label>
+  <select id="marr_years">
+    <option value="5">1년 이내</option>
+    <option value="4">1~3년</option>
+    <option value="2">3~5년</option>
+    <option value="1">5~7년</option>
+    <option value="0">7년 초과</option>
+  </select>
+
+  <label>자녀 수</label>
+  <select id="marr_kids">
+    <option value="0">없음</option>
+    <option value="3">1명</option>
+    <option value="5">2명 이상</option>
+  </select>
+
+  <label>부부 모두 무주택 여부</label>
+  <select id="marr_house">
+    <option value="3">예</option>
+    <option value="0">아니오</option>
+  </select>
+
+  <label>소득 수준</label>
+  <select id="marr_income">
+    <option value="5">100% 이하</option>
+    <option value="3">100~120%</option>
+    <option value="0">120% 초과</option>
+  </select>
+
+  <button onclick="calculateMarriageScore()">신혼부부 가점 계산</button>
+  <div id="marr_result"></div>
+
+  <script>
+    function calculateScore() {
+      const nohouse = parseInt(document.getElementById("youth_nohouse").value);
+      const reside = parseInt(document.getElementById("youth_reside").value);
+      const income = parseInt(document.getElementById("youth_income").value);
+      const total = nohouse + reside + income;
+      document.getElementById("result").innerText = "예상 가점: " + total + "점";
+    }
+
+    function calculateMarriageScore() {
+      const years = parseInt(document.getElementById("marr_years").value);
+      const kids = parseInt(document.getElementById("marr_kids").value);
+      const house = parseInt(document.getElementById("marr_house").value);
+      const income = parseInt(document.getElementById("marr_income").value);
+      const total = years + kids + house + income;
+      document.getElementById("marr_result").innerText = "예상 가점: " + total + "점";
+    }
+  </script>
+</body>
+</html>
